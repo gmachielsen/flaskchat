@@ -15,8 +15,9 @@
     
     <hr>
     
-    <form>
-        <textarea name="message" rows=4 ></textarea>
+    <form method="POST" action="/new">
+        <p><input type="message" name="message"/></p>
+        <p><input type="hidden" name="username" value="{{username}}"/></p>
         <p><input type="submit"/></p>
     </form>
 </body>

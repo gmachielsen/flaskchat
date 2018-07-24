@@ -7,10 +7,26 @@ messages = [
     "Richard: Hi everyone",
     "Everyone: Hi Richard"
     ]
-    
+
 @app.route("/")
-def show_hi():
-    return render_template("index.html", messages=messages)
+def show_join():
+    return render_template("join.html")
+    
+@app.route("/join")
+def do_join():
+    username = request.args['username']
+    return redirect("/chat/" + username)
+    
+@app.route("/chat/<username>")
+def show_chat(username):
+    return render_template("chat.html", messages=messages, username=username)
+    
+@app.route("/new", methods=["POST"])
+def add_message():
+    message = request.form['message']
+    username = request.form['username']
+    messages.append(username + ": " + message)
+    return redirect("/chat/" + username)
 
 
 if __name__ == "__main__":
